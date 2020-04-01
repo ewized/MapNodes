@@ -7,11 +7,10 @@ module.exports = {
   target: 'node',
   devServer: {
     disableHostCheck: true,
-    sockPath: '/socket',
-    sockHost: 'localhost',
     transportMode: 'ws',
-    port: 3001,
+    sockPath: '/socket',
     inline: true,
+    port: 3001,
   },
   // We are not running on the web so we dont need to download files, so changes reflect that
   optimization: {
