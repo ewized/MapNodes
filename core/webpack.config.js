@@ -6,13 +6,10 @@ module.exports = {
   devtool: 'source-map',
   target: 'node',
   devServer: {
-    stats: {
-      children: false,
-      maxModules: 0,
-    },
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
+    disableHostCheck: true,
+    sockPath: '/socket',
+    sockHost: 'localhost',
+    transportMode: 'ws',
     port: 3001,
     inline: true,
   },
