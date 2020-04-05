@@ -24,6 +24,7 @@ module.exports = {
     chunkIds: 'named',
   },
   entry: {
+    polyfills: './src/main/js/polyfills/index.js',
     mapnodes: './src/main/js/index.js',
   },
   output: {

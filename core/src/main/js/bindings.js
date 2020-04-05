@@ -13,7 +13,7 @@ const useless_function = () => {}
  *
  * @type {{ [key: string]: (...any) => any }}
  */
-const bindings = new Proxy(global.PLATFORM ?? {}, {
+const bindings = new Proxy(globalThis.PLATFORM ?? {}, {
   get(target, name) {
     if (target[name]) {
       return (...args) => {

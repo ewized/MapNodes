@@ -74,6 +74,7 @@ module.exports = {
     },
   ],
   globals: {
+    globalThis: 'readonly',
     $: 'readonly',
     var_dump: 'readonly',
     describe: 'readonly',

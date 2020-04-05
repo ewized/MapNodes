@@ -33,7 +33,7 @@ public abstract class Bindings implements Releasable {
     V8.setFlags("--harmony");
   }
   /** The V8 Runtime for everything */
-  private static V8 engine = V8.createV8Runtime("global", Files.createTempDir().getAbsolutePath());
+  private static V8 engine = V8.createV8Runtime("globalThis", Files.createTempDir().getAbsolutePath());
   /** The memory manager for any javascript object that were created */
   private static MemoryManager memoryManager = new MemoryManager(engine);
   /** The handler to interact with the Javascript object */
