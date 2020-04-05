@@ -20,12 +20,12 @@
     "mocha": "^3.2.0",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
-    "webpack": "^4.41.2",
+    "webpack": "^5.0.0-beta.14",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "test": "webpack ./build/test/js/index.test.js -o ./build/test/js/index.test.bundle.js && mocha ./build/test/js/index.test.bundle.js",
+    "test": "webpack --target node ./build/test/js/index.test.js -o ./build/test/js/index.test.bundle.js && mocha ./build/test/js/index.test.bundle.js",
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --watch --mode development --hot"
   },

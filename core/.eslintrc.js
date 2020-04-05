@@ -78,5 +78,6 @@ module.exports = {
     var_dump: 'readonly',
     describe: 'readonly',
     it: 'readonly',
+    __webpack_require__: 'readonly', // its not readonly but idk what the other option is atm
   },
 }

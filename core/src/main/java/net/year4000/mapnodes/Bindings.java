@@ -38,7 +38,7 @@ public abstract class Bindings implements Releasable {
   private static MemoryManager memoryManager = new MemoryManager(engine);
   /** The handler to interact with the Javascript object */
   protected final V8InvocationHandler handler = new V8InvocationHandler(engine, "$.js");
-  /** The V8 Object that is bind to the JAVA var */
+  /** The V8 Object that is bind to the PLATFORM var */
   private final V8Object object;
   /** Paths that need to be included after import */
   private final ArrayDeque<String> paths = Queues.newArrayDeque();

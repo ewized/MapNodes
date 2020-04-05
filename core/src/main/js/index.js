@@ -15,3 +15,6 @@ Object.entries(globals).forEach(([key, value]) => {
     console.error(error)
   }
 })
+
+// Inject webpack into the globals
+global.webpack = __webpack_require__

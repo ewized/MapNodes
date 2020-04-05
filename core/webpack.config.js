@@ -1,22 +1,25 @@
 const path = require('path')
 
+const { javascript: { JavascriptModulesPlugin } } = require('webpack')
+
 
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
-  target: 'node',
+  // we are neirther node or web or any of the preexisting targets, so apply our own
+  target: (compiler) => {
+    new JavascriptModulesPlugin().apply(compiler)
+  },
   devServer: {
     disableHostCheck: true,
     transportMode: 'ws',
-    sockPath: '/socket',
+    sockPath: '/',
     inline: true,
     port: 3001,
   },
   // We are not running on the web so we dont need to download files, so changes reflect that
   optimization: {
     minimize: false,
-    namedModules: true,
-    namedChunks: true,
     moduleIds: 'named',
     chunkIds: 'named',
   },
