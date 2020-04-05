@@ -38,8 +38,8 @@ RUN apk add --update --no-cache python3
 # Download the Sponge and Minecraft jar
 WORKDIR /opt/year4000/minecraft
 ENV LAUNCH_VERSION=1.12
-ENV MC_VERSION=1.12.1
-ENV SPONGE_VERSION=${MC_VERSION}-7.0.0-BETA-316
+ENV MC_VERSION=1.12.2
+ENV SPONGE_VERSION=${MC_VERSION}-7.2.0
 ADD https://libraries.minecraft.net/net/minecraft/launchwrapper/${LAUNCH_VERSION}/launchwrapper-${LAUNCH_VERSION}.jar libraries/net/minecraft/launchwrapper/${LAUNCH_VERSION}/launchwrapper-${LAUNCH_VERSION}.jar
 ADD https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/${SPONGE_VERSION}/spongevanilla-${SPONGE_VERSION}.jar spongevanilla.jar
 ADD https://s3.amazonaws.com/Minecraft.Download/versions/${MC_VERSION}/minecraft_server.${MC_VERSION}.jar minecraft_server.${MC_VERSION}.jar
