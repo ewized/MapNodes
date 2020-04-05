@@ -14,13 +14,13 @@ export const platform = new Proxy(globalThis.PLATFORM ?? {}, {
         try {
           return target[name](...args)
         } catch (any) {
-          console.error('An error has been thrown')
-          console.error(any)
+          console?.error('An error has been thrown')
+          console?.error(any)
         }
         return undefined
       }
     }
-    console.error(`${name} has not been defined in the platform`)
+    console?.error(`${name} has not been defined in the platform`)
     return undefined
   },
 })
