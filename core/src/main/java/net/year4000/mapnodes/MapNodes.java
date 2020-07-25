@@ -41,7 +41,9 @@ public interface MapNodes {
     // Inject the javascript files into v8
     logger().info("Loading javascript files into v8 runtime");
     // Load just the bindings and the bootstrap it will handle the rest
-    ImmutableList.of("/polyfills.bundle.js", "/mapnodes.bundle.js").forEach(bindings()::include);
+    //ImmutableList.of("/polyfills.bundle.js", "/mapnodes.bundle.js").forEach(bindings()::include);
+    //ImmutableList.of("http://host.docker.internal:3001/mapnodes.bundle.js").forEach(file -> bindings().include(file));
+    ImmutableList.of("!js://polyfills.bundle.js", "!js://mapnodes.bundle.js").forEach(file -> bindings().include(file));
     // Generate the maps
     logger().info("Generating map packages");
     nodeFactory().generatePackages();
@@ -53,7 +55,7 @@ public interface MapNodes {
     nodeFactory().packages().forEach(map -> {
       try {
         Node node = nodeFactory().create(map);
-        logger().info("Added Map {} version {} location: {}", node.name(), node.version(), map.location());
+        //logger().info("Added Map {} version {} location: {}", node.name(), node.version(), map.location());
         NODE_MANAGER.addToQueue(node);
       } catch (Exception error) {
         logger().info("Adding map: " + map.toString());

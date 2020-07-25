@@ -19,6 +19,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.stream.Collectors;
 
@@ -57,7 +59,6 @@ public abstract class Bindings implements Releasable {
       }
     }
     engine.add("PLATFORM", object);
-    engine.getLocker().acquire(); // acquire the lock because idk
   }
 
   /** Get the v8 instance */
@@ -91,34 +92,32 @@ public abstract class Bindings implements Releasable {
     logger.info(message.replaceAll("\n", ""));
   }
 
-  /** $.bindings._include */
-  @Bind
-  public void _include(String path) {
-    Conditions.nonNullOrEmpty(path, "path");
-    if (!engine.isReleased()) {
-      paths.add(path);
-    } else {
-      include(path);
+  /** Helper method to convert the path to the InputStream so we can download the contents */
+  private InputStream convertPathToStream(String path) throws IOException {
+    try {
+      final String schema = "!js://";
+      if (path.startsWith(schema)) {
+        String internalPath = path.replaceFirst(schema, "/");
+        return Bindings.class.getResourceAsStream(internalPath);
+      }
+      return new URL(path).openStream();
+    } catch (MalformedURLException error) {
+      throw ErrorReporter.builder(error).add("url: ", path).build().report();
     }
   }
 
   /** $.bindings.include */
   @Bind
-  public void include(String path) {
+  public Object include(String path) {
     // Include the system
     logger.info("Loading javascript file: " + Conditions.nonNullOrEmpty(path, "path"));
-    InputStream stream = Bindings.class.getResourceAsStream(path);
-    try (BufferedReader buffer = new BufferedReader(new InputStreamReader(stream))) {
+    try (BufferedReader buffer = new BufferedReader(new InputStreamReader(this.convertPathToStream(path)))) {
       String script = buffer.lines().collect(Collectors.joining("\n"));
-      engine.executeVoidScript(script, path, 0); // The path is the scriptName for errors
+      return engine.executeScript(script, path, 0); // The path is the scriptName for errors
     } catch (IOException | NullPointerException error) {
       logger.error(ErrorReporter.builder(error).add("path: ", path).build().toString());
-    } finally {
-      // Check for pending imports
-      if (!paths.isEmpty()) {
-        include(paths.pop());
-      }
     }
+    return new Object();
   }
 
   /** $.bindings.send_message */
