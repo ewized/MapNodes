@@ -3,7 +3,6 @@
  */
 plugins {
   id 'java'
-  id 'idea'
   id 'cpp'
 }
 
