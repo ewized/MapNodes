@@ -17,6 +17,7 @@ classes/
 # Gradle
 .gradle/
 *build/
+gradle.properties
 
 # IDES
 *~
