@@ -73,6 +73,11 @@ public abstract class Bindings implements Releasable {
     memoryManager.release();
   }
 
+  @Override
+  public void close() {
+    this.release();
+  }
+
   /** $.bindings.debug */
   @Bind
   public boolean debug() {
