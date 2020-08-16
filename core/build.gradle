@@ -4,7 +4,6 @@
 
 plugins {
   id 'java'
-  //id 'idea'
   //id 'cpp'
   id 'com.github.node-gradle.node' version '2.2.4'
 }
@@ -37,10 +36,6 @@ sourceSets {
     srcDir "${projectDir}/src/test/js/"
   }
 }
-
-// idea.module {
-//   sourceDirs += file("${projectDir}/src/main/js/")
-// }
 
 test.testLogging.showStandardStreams = true
 
