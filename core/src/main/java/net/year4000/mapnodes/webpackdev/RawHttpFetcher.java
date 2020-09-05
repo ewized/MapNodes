@@ -1,7 +1,9 @@
-package net.year4000.utilities.net;
+package net.year4000.mapnodes.webpackdev;
 
 import com.google.common.io.CharStreams;
 import net.year4000.utilities.Conditions;
+import net.year4000.utilities.net.AbstractHttpFetcher;
+import net.year4000.utilities.net.ContentType;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -9,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@AbstractHttpFetcher.ContentType("text; charset=utf8")
+@ContentType("text; charset=utf8")
 public class RawHttpFetcher extends AbstractHttpFetcher<String> {
   private RawHttpFetcher(int maxTries, ExecutorService executorService) {
     super(maxTries, executorService);

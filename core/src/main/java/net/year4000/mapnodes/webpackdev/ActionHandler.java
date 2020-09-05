@@ -6,7 +6,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import net.year4000.utilities.Conditions;
 import net.year4000.utilities.URLBuilder;
 import net.year4000.utilities.net.JsonHttpFetcher;
-import net.year4000.utilities.net.RawHttpFetcher;
 import net.year4000.utilities.value.Value;
 
 import java.net.URI;
